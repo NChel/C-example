@@ -9,15 +9,15 @@ void main(void) {
 	const int *(*deptr) = &ptr;
 	const int *(&ref) = ptr;
 
-	cout << "num :" << num << endl;
-	cout << "*ptr :" << *ptr << endl;
-	cout << "ptr : " << ptr << endl;
-	cout << "*(*deptr) :" << *(*deptr) << endl;
-	cout << "*deptr :" << *deptr << endl;
-	cout << "deptr :" << deptr << endl;
-	cout << "*(&ref) :" << *(&ref) << endl;
-	cout << "&ref :" << &ref << endl;
-	cout << "ref :" << ref << endl;
+	cout << "num :" << num << endl;			//12
+	cout << "*ptr :" << *ptr << endl;		//12
+	cout << "ptr : " << ptr << endl;		//0021FD68
+	cout << "*(*deptr) :" << *(*deptr) << endl;	//12
+	cout << "*deptr :" << *deptr << endl;		//0021FD68
+	cout << "deptr :" << deptr << endl;		//0021FD5C
+	cout << "*(&ref) :" << *(&ref) << endl;		//0021FD68
+	cout << "&ref :" << &ref << endl;		//0021FD5C
+	cout << "ref :" << ref << endl;			//0021FD68
 
 
 }
