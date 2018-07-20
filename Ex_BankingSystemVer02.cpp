@@ -1,18 +1,18 @@
 #include <iostream>
 #include <cstring>
-#define MAX 100	//ÀÌ¸§°ú ÀÜ°í ÃÖ´ë °¹¼ö¸¦¶æÇÔ
+#define MAX 100	//ì´ë¦„ê³¼ ì”ê³  ìµœëŒ€ ê°¯ìˆ˜ë¥¼ëœ»í•¨
 
 /*
-	Âü°í·Î Å¬·¡½º ÀÌ¸§Àº Accout °¡ ¾Æ´Ñ accout ÀÓÀ» Âü°í¹Ù¶÷.
+	ì°¸ê³ ë¡œ í´ë˜ìŠ¤ ì´ë¦„ì€ Accout ê°€ ì•„ë‹Œ accout ì„ì„ ì°¸ê³ ë°”ëŒ.
 */
 
 using namespace std;
 
-void menu();				//¸Ş´º
-void deposit(void);			//ÀÔ±İ
-void withdraw(void);		//Ãâ±İ
-void insertAcout(void);		//°èÁÂ°è¼³
-void showAllAcount(void);	//ÀüÃ¼ È¸¿øÁ¶È¸
+void menu();				//ë©”ë‰´
+void deposit(void);			//ì…ê¸ˆ
+void withdraw(void);		//ì¶œê¸ˆ
+void insertAcout(void);		//ê³„ì¢Œê³„ì„¤
+void showAllAcount(void);	//ì „ì²´ íšŒì›ì¡°íšŒ
 
 enum { MAKE = 1, DEPOSIT, WITHDRAW, INQUIRE, EXIT };
 
@@ -22,13 +22,18 @@ private:
 	int balance;
 	char * name;
 public:
-	accout(int id, int money, const char * myname):accId(id),balance(money) {	//»ı¼ºÀÚ
+	accout(int id, int money, const char * myname):accId(id),balance(money) {	//ìƒì„±ì
 		name = new char[strlen(myname) + 1];
 		strcpy(name, myname);
 	}
+	//ë™ì í• ë‹¹ì¸ ë¬¸ìì—´ nameì€ 'name(copy.name)' ì´ëŸ°ì‹ìœ¼ë¡œ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
+	accout(const accout&copy) :accId(copy.accId), balance(copy.balance) {
+		name = new char[strlen(copy.name) + 1];
+		strcpy(name, copy.name);
+	}
 	int GetAccId() { return accId; }
 	int GetBalance() { return balance; }
-	void Deposit(int money) {													//¾Æ·¡´Â ´Ù¸¥ ¸Ş¼Òµå¿¡ ½ÇÇàµÇ´Â°Ô ¾Æ´Ñ Å¬·¡½º ¾È¿¡¼­ ½ÇÇàµÇ´Â Ä¸½¶È­ & Á¤º¸Àº´Ğ
+	void Deposit(int money) {													//ì•„ë˜ëŠ” ë‹¤ë¥¸ ë©”ì†Œë“œì— ì‹¤í–‰ë˜ëŠ”ê²Œ ì•„ë‹Œ í´ë˜ìŠ¤ ì•ˆì—ì„œ ì‹¤í–‰ë˜ëŠ” ìº¡ìŠí™” & ì •ë³´ì€ë‹‰
 		balance += money;
 	}
 	int Withdraw(int money) {
@@ -38,24 +43,24 @@ public:
 		return balance;
 	}
 	void showAccInfo() {
-		cout << "°èÁÂID : " << accId << endl;
-		cout << "ÀÌ¸§ : " << name << endl;
-		cout << "ÀÜ¾× : " << balance << endl;
+		cout << "ê³„ì¢ŒID : " << accId << endl;
+		cout << "ì´ë¦„ : " << name << endl;
+		cout << "ì”ì•¡ : " << balance << endl;
 	}
-	~accout() {																	//¼Ò¸êÀÚ
+	~accout() {																	//ì†Œë©¸ì
 		delete[]name;
 	}
 };
 
-accout * accArr[MAX];		//ÀúÀåÀ» À§ÇÑ ¹è¿­
-int accCnt = 0;				//°èÁÂ °¹¼ö ÃÊ±âÈ­= 0
+accout * accArr[MAX];		//ì €ì¥ì„ ìœ„í•œ ë°°ì—´
+int accCnt = 0;				//ê³„ì¢Œ ê°¯ìˆ˜ ì´ˆê¸°í™”= 0
 
 
 int main(void) {
-	int cho;				//¸Ş´º¼±ÅÃÇÏ´Â º¯¼ö
+	int cho;				//ë©”ë‰´ì„ íƒí•˜ëŠ” ë³€ìˆ˜
 	while (1) {
 		menu();
-		cout << "¸Ş´º¿¡ ÇØ´çÇÏ´Â ¼ıÀÚ¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä : ";
+		cout << "ë©”ë‰´ì— í•´ë‹¹í•˜ëŠ” ìˆ«ìë¥¼ ì„ íƒí•´ì£¼ì„¸ìš” : ";
 		cin >> cho;
 		cout << endl;
 		switch (cho)
@@ -75,37 +80,37 @@ int main(void) {
 		case EXIT:
 			break;
 		default:
-			cout << "À¯È¿ÇÏÁö ¾Ê´Â ¸í·ÉÀÔ´Ï´Ù." << endl;
+			cout << "ìœ íš¨í•˜ì§€ ì•ŠëŠ” ëª…ë ¹ì…ë‹ˆë‹¤." << endl;
 			break;
 		}
 		if (cho == 5)
 			break;
 	}
-	cout << "ÇÁ·Î±×·¥ Á¾·á" << endl;
+	cout << "í”„ë¡œê·¸ë¨ ì¢…ë£Œ" << endl;
 	return 0;
 }
 
 void menu() {
-	cout << "-----¸Ş´º-----" << endl;
-	cout << "1. °èÁÂ°è¼³" << endl;
-	cout << "2. ÀÔ ±İ" << endl;
-	cout << "3. Ãâ ±İ" << endl;
-	cout << "4. °èÁÂ¹øÈ£ ÀüÃ¼ Ãâ·Â" << endl;
-	cout << "5. ÇÁ·Î±×·¥ Á¾·á" << endl;
+	cout << "-----ë©”ë‰´-----" << endl;
+	cout << "1. ê³„ì¢Œê³„ì„¤" << endl;
+	cout << "2. ì… ê¸ˆ" << endl;
+	cout << "3. ì¶œ ê¸ˆ" << endl;
+	cout << "4. ê³„ì¢Œë²ˆí˜¸ ì „ì²´ ì¶œë ¥" << endl;
+	cout << "5. í”„ë¡œê·¸ë¨ ì¢…ë£Œ" << endl;
 	cout << endl;
 }
-void insertAcout(void) {															//Ã³À½ ±¸Á¶Ã¼ ¹öÀüÀÏ¶§´Â ¸Şµå¿¡¼­ ¿¬»êÀ» ÇßÀ¸³ª, Å¬·¡½º¸¦ ¼±¾ğÇÔÀ¸·Î
-	int id;																			//Å¬·¡½º Á¢±Ù¾øÀÌ´Â ¿¬»êÀ» ÇÒ ¼ö¾øÀ½
+void insertAcout(void) {															//ì²˜ìŒ êµ¬ì¡°ì²´ ë²„ì „ì¼ë•ŒëŠ” ë©”ë“œì—ì„œ ì—°ì‚°ì„ í–ˆìœ¼ë‚˜, í´ë˜ìŠ¤ë¥¼ ì„ ì–¸í•¨ìœ¼ë¡œ
+	int id;																			//í´ë˜ìŠ¤ ì ‘ê·¼ì—†ì´ëŠ” ì—°ì‚°ì„ í•  ìˆ˜ì—†ìŒ
 	char name[MAX];
 	int balance;
 
-	cout << "----°èÁÂ°è¼³-------" << endl;
-	cout << "°èÁÂ¸¦ °è¼³ÇÕ´Ï´Ù." << endl;
-	cout << "°èÁÂÀÇ ¹øÈ£ : ";
+	cout << "----ê³„ì¢Œê³„ì„¤-------" << endl;
+	cout << "ê³„ì¢Œë¥¼ ê³„ì„¤í•©ë‹ˆë‹¤." << endl;
+	cout << "ê³„ì¢Œì˜ ë²ˆí˜¸ : ";
 	cin >> id;
-	cout << "ÀÌ¸§ : ";
+	cout << "ì´ë¦„ : ";
 	cin >> name;
-	cout << "ÃÊ±â ÀÔ±İ¾× : ";
+	cout << "ì´ˆê¸° ì…ê¸ˆì•¡ : ";
 	cin >> balance;
 	accArr[accCnt++] = new accout(id, balance, name);
 	cout << "----------" << endl;
@@ -114,46 +119,46 @@ void insertAcout(void) {															//Ã³À½ ±¸Á¶Ã¼ ¹öÀüÀÏ¶§´Â ¸Şµå¿¡¼­ ¿¬»êÀ» 
 void deposit(void) {
 	
 
-	cout << "-----°èÁÂ ÀÔ±İ-----" << endl;
+	cout << "-----ê³„ì¢Œ ì…ê¸ˆ-----" << endl;
 	if (accCnt == 0) {
-		cout << "ÀÔ±İ°¡´ÉÇÑ °èÁÂ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.";
+		cout << "ì…ê¸ˆê°€ëŠ¥í•œ ê³„ì¢Œê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
 	}
 	else {
 		int money;
 		int id;
-		cout << "ÀÔ±İÇÒ °èÁÂ¹øÈ£¸¦ ¾²½Ã¿À : ";
+		cout << "ì…ê¸ˆí•  ê³„ì¢Œë²ˆí˜¸ë¥¼ ì“°ì‹œì˜¤ : ";
 		cin >> id;
 		cout << endl;
-		cout << "ÀÔ±İÇÒ ±İ¾×À» ¾²½Ã¿À : ";
+		cout << "ì…ê¸ˆí•  ê¸ˆì•¡ì„ ì“°ì‹œì˜¤ : ";
 		cin >> money;
 		cout << endl;
 
 		for (int i = 0; i < accCnt; i++) {
 			if (accArr[i]->GetAccId()==id) {
 				accArr[i]->Deposit(money);
-				cout << "ÀÔ±İÈÄ ÀÜ¾×Àº " << accArr[i]->GetBalance() << "ÀÔ´Ï´Ù." << endl;
+				cout << "ì…ê¸ˆí›„ ì”ì•¡ì€ " << accArr[i]->GetBalance() << "ì…ë‹ˆë‹¤." << endl;
 				return;
 			}
 			else
 			{
-				cout << "°èÁÂ¹øÈ£°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù." << endl;
+				cout << "ê³„ì¢Œë²ˆí˜¸ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤." << endl;
 			}
 		}
 	}
 	cout << endl;
 }
 void withdraw(void) {
-	cout << "-----°èÁÂ Ãâ±İ-----" << endl;
+	cout << "-----ê³„ì¢Œ ì¶œê¸ˆ-----" << endl;
 	if (accCnt == 0) {
-		cout << "Ãâ±İ°¡´ÉÇÑ °èÁÂ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.";
+		cout << "ì¶œê¸ˆê°€ëŠ¥í•œ ê³„ì¢Œê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
 	}
 	else {
 		int Taccid;
 		int Tbalance;
-		cout << "Ãâ±İÇÒ °èÁÂ¹øÈ£¸¦ ¾²½Ã¿À : ";
+		cout << "ì¶œê¸ˆí•  ê³„ì¢Œë²ˆí˜¸ë¥¼ ì“°ì‹œì˜¤ : ";
 		cin >> Taccid;
 		cout << endl;
-		cout << "Ãâ±İÇÒ ±İ¾×À» ¾²½Ã¿À : ";
+		cout << "ì¶œê¸ˆí•  ê¸ˆì•¡ì„ ì“°ì‹œì˜¤ : ";
 		cin >> Tbalance;
 		cout << endl;
 
@@ -161,25 +166,25 @@ void withdraw(void) {
 			if (accArr[i]->GetAccId() == Taccid) {
 				if (accArr[i]->GetBalance() > Tbalance) {
 					accArr[i]->Withdraw(Tbalance);
-					cout << "Ãâ±İÈÄ ÀÜ¾×Àº " << accArr[i]->GetBalance() << "ÀÔ´Ï´Ù." << endl;
+					cout << "ì¶œê¸ˆí›„ ì”ì•¡ì€ " << accArr[i]->GetBalance() << "ì…ë‹ˆë‹¤." << endl;
 					return;
 				}
 				else {
-					cout << "ÀÜ°íÀÇ ÀÜ¾×ÀÌ ºÎÁ·ÇÕ´Ï´Ù.";
+					cout << "ì”ê³ ì˜ ì”ì•¡ì´ ë¶€ì¡±í•©ë‹ˆë‹¤.";
 				}
 			}
 			else
 			{
-				cout << "°èÁÂ¹øÈ£°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù." << endl;
+				cout << "ê³„ì¢Œë²ˆí˜¸ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤." << endl;
 			}
 		}
 	}
 	cout << endl;
 }
 void showAllAcount(void) {
-	cout << "-----¸ğµç°èÁÂ-----" << endl;
+	cout << "-----ëª¨ë“ ê³„ì¢Œ-----" << endl;
 	if (accCnt == 0) {
-		cout << "°èÁÂ¸ñ·ÏÀÌ ¾ø½À´Ï´Ù..";
+		cout << "ê³„ì¢Œëª©ë¡ì´ ì—†ìŠµë‹ˆë‹¤..";
 	}
 	else {
 		for (int i = 0; i < accCnt; i++) {
