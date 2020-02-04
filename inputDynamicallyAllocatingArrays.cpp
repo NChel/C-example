@@ -1,5 +1,5 @@
 /*
-	ÀÔ·Â¹ŞÀº ¹è¿­À» µ¿ÀûÇÒ´çÇÑÈÄ Ãâ·Â
+	ì…ë ¥ë°›ì€ ë°°ì—´ì„ ë™ì í• ë‹¹í•œí›„ ì¶œë ¥
 */
 
 #include <iostream>
@@ -9,12 +9,12 @@ char inputarr(int *arrtemp, char *data, const int len) {
 	char *context = NULL;
 	int i = 0;
 	char *temp_s = strtok_s(data, " ", &context);
-	while (temp_s != NULL)            // ÀÚ¸¥ ¹®ÀÚ¿­ÀÌ ³ª¿ÀÁö ¾ÊÀ» ¶§±îÁö ¹İº¹
+	while (temp_s != NULL)            // ìë¥¸ ë¬¸ìì—´ì´ ë‚˜ì˜¤ì§€ ì•Šì„ ë•Œê¹Œì§€ ë°˜ë³µ
 	{
-		arrtemp[i] = atoi(temp_s);             // ¹®ÀÚ¿­À» ÀÚ¸¥ µÚ ¸Ş¸ğ¸® ÁÖ¼Ò¸¦ ¹®ÀÚ¿­ Æ÷ÀÎÅÍ ¹è¿­¿¡ ÀúÀå
+		arrtemp[i] = atoi(temp_s);             // ë¬¸ìì—´ì„ ìë¥¸ ë’¤ ë©”ëª¨ë¦¬ ì£¼ì†Œë¥¼ ë¬¸ìì—´ í¬ì¸í„° ë°°ì—´ì— ì €ì¥
 		i++;
 
-		temp_s = strtok_s(NULL, " ", &context);   // ´ÙÀ½ ¹®ÀÚ¿­À» Àß¶ó¼­ Æ÷ÀÎÅÍ¸¦ ¹İÈ¯
+		temp_s = strtok_s(NULL, " ", &context);   // ë‹¤ìŒ ë¬¸ìì—´ì„ ì˜ë¼ì„œ í¬ì¸í„°ë¥¼ ë°˜í™˜
 	}
 
 	return *arrtemp;
@@ -24,13 +24,13 @@ char inputarr(int *arrtemp, char *data, const int len) {
 int main(void) {
 
 	int arrlen = 0;
-	cout << "¹è¿­Å©±â¸¦ ÀÔ·ÂÇÏ¼¼¿ä\n";
+	cout << "ë°°ì—´í¬ê¸°ë¥¼ ì…ë ¥í•˜ì„¸ìš”\n";
 	cin >> arrlen;
-	cin.ignore(1000, '\n');			//¹è¿­ÀÇ ¼ö ÀÔ·Â¹ŞÀºµÚ ´ÙÀ½ ¹è¿­À» ¹ŞÀ» ÁØºñ(¹öÆÛºñ¿ò)
-	cout << "¹è¿­Å©±â : " << arrlen << endl;
+	cin.ignore(1000, '\n');			//ë°°ì—´ì˜ ìˆ˜ ì…ë ¥ë°›ì€ë’¤ ë‹¤ìŒ ë°°ì—´ì„ ë°›ì„ ì¤€ë¹„(ë²„í¼ë¹„ì›€)
+	cout << "ë°°ì—´í¬ê¸° : " << arrlen << endl;
 
 
-	cout << "¹è¿­À» ÀÔ·ÂÇÏ¼¼¿ä '1 2 3 4' ÀÌ·±½ÄÀ¸·Î : ";
+	cout << "ë°°ì—´ì„ ì…ë ¥í•˜ì„¸ìš” '1 2 3 4' ì´ëŸ°ì‹ìœ¼ë¡œ : ";
 	char temp[1000];
 	std::cin.getline(temp, 99);
 
@@ -40,6 +40,7 @@ int main(void) {
 	for (int j = 0; j < arrlen; j++) {
 		cout << arr[j] << endl;
 	}
-
+	
+	delete[] arr;
 	return 0;
 }
